@@ -5,6 +5,9 @@ date: 2018-04-19 13:59:52
 tags: finance python
 ---
 
+I introduced the Efficient Frontier portfolio optimization scheme in a presentation for MATH480 - Special Topics. <br>
+The following is the tear sheet generated for the Efficient Frontier implementation on Quantopian.
+
 ```python
 bt = get_backtest('5ad8e9664a5ac34596df6c29')
 bt.create_full_tear_sheet()
