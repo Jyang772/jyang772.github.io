@@ -1,6 +1,6 @@
 ---
 layout: post
-title: placement
+title: Placement new
 date: 2014-10-24 22:42:00
 tags: c++
 ---
