@@ -1,6 +1,6 @@
 ---
 layout: tagpage
-title: "Tag: R"
-tag: R
+title: "Tag: python"
+tag: python
 robots: noindex
 ---
