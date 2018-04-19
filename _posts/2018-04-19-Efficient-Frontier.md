@@ -2,7 +2,7 @@
 layout: post
 title: Efficient Frontier
 date: 2018-04-19 13:59:52
-tags: finance R
+tags: finance python
 ---
 
 ```python
