@@ -3,8 +3,9 @@ layout: page
 title: About me
 ---
 
-Justin-Saxton S. Yang<br>
-Computer Scientist at the University of Massachusetts Boston.
+**Justin-Saxton S. Yang**<br>
+Computer Scientist at the University of Massachusetts Boston.<br>
+Straya-Kowalski Division
 
 Interests:<br>
 Quantum Computation, Machine Intelligence, Mathematical Finance.
