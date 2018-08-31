@@ -36,6 +36,12 @@ The input variable to the models will be the prior __n__ days' volume changes.
 The output variable will be the current day's volume change.
 
 
+**Predictions**
+
+For each model, we run model.predict() and sum up all of the predictions. A positive sum means the volume is predicted to rise, and a negative sum means the volume is predicted to fall. We buy shares of the asset when it is positive, and short the asset when negative. 
+
+Note: volume_changes needs to be reshaped in order to work with zipline-live
+
 ```
 def create_models(context, data):
     # Get the relevant daily prices
@@ -70,6 +76,8 @@ def trade(context, data):
         # Get the price changes
         volume_changes = np.diff(recent_volumes).tolist()
         
+        volume_changes = np.reshape(volume_changes,(1,-1))
+        
         # Predict using our models and the recent prices
         # Apparently 5 is the maximum here
         prediction1 = context.model1.predict(volume_changes)
@@ -92,5 +100,6 @@ def trade(context, data):
         
 ```
 
+<img src="https://i.imgur.com/0sA84cZ.png" alt="Portfolio_Value" width="200"/>
 
 
