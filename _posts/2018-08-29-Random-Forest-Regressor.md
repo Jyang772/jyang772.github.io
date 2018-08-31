@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Random Forest Regression on Stock Prices 
-date: 2018-08-11 16:24:58
+date: 2018-08-31 16:28:00
 tags: finance python machine-learning
 ---
 
