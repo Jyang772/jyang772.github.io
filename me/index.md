@@ -7,6 +7,8 @@ title: About me
 Computer Scientist at the University of Massachusetts Boston.<br>
 Straya-Kowalski Division
 
+Represented UMass Boston in the ICPC North America North East Regional and ACM BOSPRE. 
+
 Interests:<br>
 Quantum Computation, Machine Intelligence, Mathematical Finance.
 
