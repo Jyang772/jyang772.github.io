@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<!-- <script src="/assets/js/three.js"></script>
+<script src="/assets/js/app.js"></script>
+
+
+<style>
+    #blog-threejs canvas {
+      /* force the canvas to fill out the entire area */
+      width: 100%!important; height: 100%!important; 
+      
+      /* force the z-pos of the canvas to be on-top */
+      z-index: -1; 
+    }
+    canvas {
+		position: fixed;
+		left: 0;
+		top: 0;
+		z-index: -1;
+	}
+</style>
+<div id="blog-threejs"></div>
+
+ -->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    
+        <title>Random Forest Regression on Stock Prices</title>
+    
+
+    <meta name="description" content="2>&1">
+
+    
+
+    <link rel="icon" href="/assets/img/favicon.png">
+
+    <!-- highlighting -->
+    <link href="/assets/css/syntax.css" rel="stylesheet" >
+
+    <!-- FONTS -->
+    <link rel="stylesheet" 
+href="https://fonts.googleapis.com/css?family=Inconsolata:400,700">
+
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+</head>
+
+<body>
+
+    <div class="wrapper">
+        
+  
+
+
+
+
+
+
+
+<div class="post">
+	<div class="post__back">
+    	<a href="/">&lt;-- home</a>
+    </div>
+    <div class="post__title">
+    	<h1>Random Forest Regression on Stock Prices</h1>
+    </div>
+    <div class="post__date">
+    	<p>August 31, 2018</p>
+    </div>
+    <div class="post__meta">
+    	<span>tags: 
+        
+            
+            <a href="/tag/finance">finance</a>
+        
+            
+            <a href="/tag/python">python</a>
+        
+            
+            <a href="/tag/machine-learning">machine-learning</a>
+        
+        </span>
+    </div>
+    <div class="post__content"?>
+        <p>In this example, we will use Scikit-Learn’s RandomForestRegressor to generate trading signals on Quantopian. 
+Using previous day’s volume changes, we will predict the current volume change for today. We will generate a new model at the start of end of every week, to be used at the start of the next week. At every minute, we will use the predictions from the four models to trade.</p>
+
+<script src="https://gist.github.com/Jyang772/2bce14fa9685d99b5a2e55d1a9050dd3.js?file=s1.py"></script>
+
+<p><strong>Input and Output Variables</strong></p>
+
+<p>The input variable to the models will be the prior <strong>n</strong> days’ volume changes.
+The output variable will be the current day’s volume change.</p>
+
+<p><strong>Predictions</strong></p>
+
+<p>For each model, we run model.predict() and sum up all of the predictions. A positive sum means the volume is predicted to rise, and a negative sum means the volume is predicted to fall. We buy shares of the asset when it is positive, and short the asset when negative.</p>
+
+<p>Note: volume_changes needs to be reshaped in order to work with zipline-live</p>
+
+<script src="https://gist.github.com/Jyang772/2bce14fa9685d99b5a2e55d1a9050dd3.js?file=s2.py"></script>
+
+<p><img src="https://i.imgur.com/0sA84cZ.png" alt="Portfolio_Value" width="500" /></p>
+
+<p>ToDo: upload tearsheet</p>
+
+
+    </div>
+
+</div>
+
+    </div>
+
+</body>
+
+</html>
