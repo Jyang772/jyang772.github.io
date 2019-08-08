@@ -15,7 +15,7 @@ Ex.
 	[7,2,5,10,8]
 	m = 3
 
-<script src="https://gist.github.com/Jyang772/e2e8651468d73a4acf0652e5d3f1f97d#file-410.js"></script>
+<script src="https://gist.github.com/Jyang772/e2e8651468d73a4acf0652e5d3f1f97d.js?file=410"></script>
 
 
 
