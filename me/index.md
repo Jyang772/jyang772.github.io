@@ -3,7 +3,7 @@ layout: page
 title: About me
 ---
 
-**Justin-Saxton S. Yang**<br>
+**Justin S. Yang**<br>
 Computer Scientist at the University of Massachusetts Boston.<br>
 Straya-Kowalski Division
 
