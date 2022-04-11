@@ -1,27 +1,15 @@
-# Blog settings
-permalink: /blog/:title
+# Example Site settings
 
+#google_analytics: UA-NNNNNNNN-N
 
-# My variables
-name: Justin
-description: 2>&1 
-google_verification: null
+header_pages:
+  - index.md
+  - about.md
 
+#footer: 'follow us on <a href="https://twitter.com/">twitter</a>'
 
-# File management
-include: [".htaccess"]
-#exclude: ["README.md", "LICENSE"]
+style: light # dark (default) or light
+#listen_for_clients_preferred_style: true # true or false (default)
 
-
-# Sass
-sass:
-  style: :compressed
-  sass_dir: _sass
-
-
-# Markdown
-markdown: kramdown
-kramdown:
-  input: GFM
-  hard_wrap: false
-highlighter: rouge
+plugins:
+  - jekyll-seo-tag

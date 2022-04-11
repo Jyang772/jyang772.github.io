@@ -1,5 +1,4 @@
-<h5>Tag List:</h5>
-<h6>
+<h2>Tag List: </h2>
 {% capture temptags %}
   {% for tag in site.tags %}
     {{ tag[1].size | plus: 1000 }}#{{ tag[0] }}#{{ tag[1].size }}
@@ -11,4 +10,3 @@
   {% capture tagname %}{{ tagitems[1] }}{% endcapture %}
   <a href="/tag/{{ tagname }}"><code class="highligher-rouge"><nobr>{{ tagname }}</nobr></code></a>
 {% endfor %}
-</h6>
