@@ -1,0 +1,7 @@
+PATH="$PATH:$(ruby -e 'print Gem.user_dir')/bin"
+
+bundle exec jekyll serve
+
+create post in _posts using util-script/jekyll-post
+
+then run tag_generator.py
