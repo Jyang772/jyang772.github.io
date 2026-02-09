@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Justin Yang // Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg: #FAFAF8;
+    --bg-card: #FFFFFF;
+    --text-primary: #1A1A1A;
+    --text-secondary: #5C5C5C;
+    --text-tertiary: #8A8A8A;
+    --accent: #2D5A27;
+    --accent-light: #E8F0E7;
+    --border: #E8E6E1;
+    --border-hover: #D0CEC9;
+    --tag-bg: #F0EEEA;
+    --tag-text: #4A4A4A;
+    --shadow-lg: 0 8px 32px rgba(0,0,0,0.08);
+    --radius: 12px;
+    --font-display: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Source Sans 3', -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 2rem; }
+body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text-primary);
+    line-height: 1.7;
+    font-size: 16px;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--accent); color: white; }
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    opacity: 0.025;
+    pointer-events: none;
+    z-index: 9999;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+}
+a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+a:hover { color: var(--text-primary); }
+.container { max-width: 1120px; margin: 0 auto; padding: 0 2rem; }
+
+.hero { padding: 10vh 0 5rem; animation: fadeUp 0.8s ease both; }
+.hero__label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+.hero__label::before {
+    content: '';
+    display: inline-block;
+    width: 28px;
+    height: 1px;
+    background: var(--accent);
+}
+.hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.6rem, 5vw, 3.8rem);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.25rem;
+}
+.hero h1 em { font-style: italic; color: var(--accent); }
+.hero__bio {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    max-width: 560px;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+.hero__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+}
+.hero__links a {
+    color: var(--text-secondary);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0;
+    border-bottom: 1px solid transparent;
+    transition: all 0.2s;
+}
+.hero__links a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+.hero__links svg { width: 15px; height: 15px; flex-shrink: 0; }
+.skip-link {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-tertiary);
+    margin-top: 2rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.skip-link:hover { color: var(--accent); }
+.skip-link svg { width: 14px; height: 14px; animation: bobDown 2s ease-in-out infinite; }
+
+.projects { padding: 0 0 6rem; }
+.projects__heading {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 2rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+}
+.projects__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeUp 0.5s ease forwards;
+}
+.card:nth-child(1) { animation-delay: 0.00s; }
+.card:nth-child(2) { animation-delay: 0.06s; }
+.card:nth-child(3) { animation-delay: 0.12s; }
+.card:nth-child(4) { animation-delay: 0.18s; }
+.card:nth-child(5) { animation-delay: 0.24s; }
+.card:nth-child(6) { animation-delay: 0.30s; }
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--border-hover);
+}
+.card__media {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    background: linear-gradient(135deg, #f5f5f0 0%, #ebe9e4 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+}
+.card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+.card:hover .card__media img { transform: scale(1.03); }
+.card__media-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--text-tertiary);
+}
+.card__media-icon svg { width: 40px; height: 40px; stroke-width: 1.2; }
+.card__media-icon span {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.05em;
+}
+
+
+.card__body {
+    padding: 1.25rem 1.25rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.card__top-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.15rem;
+}
+.card__title {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.3;
+}
+.card__title a { color: var(--text-primary); }
+.card__title a:hover { color: var(--accent); }
+.card__badge {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.03em;
+    padding: 0.15rem 0.5rem;
+    border-radius: 99px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    background: var(--accent-light);
+    color: var(--accent);
+}
+.card__badge--closed { background: var(--tag-bg); color: var(--text-tertiary); }
+.card__subtitle {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+    margin-bottom: 0.75rem;
+}
+.card__description {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-bottom: 1rem;
+}
+.card__tag {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.02em;
+    padding: 0.2rem 0.5rem;
+    background: var(--tag-bg);
+    color: var(--tag-text);
+    border-radius: 4px;
+}
+.card__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: auto;
+}
+.card__action {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    padding: 0.4rem 0.75rem;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    transition: all 0.2s;
+}
+.card__action svg { width: 12px; height: 12px; }
+.card__action--primary { background: var(--text-primary); color: var(--bg); }
+.card__action--primary:hover { background: var(--accent); color: white; }
+.card__action--secondary { background: var(--bg); color: var(--text-secondary); border: 1px solid var(--border); }
+.card__action--secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+footer {
+    padding: 2rem 0 4rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+footer p { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-tertiary); }
+footer a { color: var(--text-tertiary); }
+footer a:hover { color: var(--accent); }
+.footer__top {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-tertiary);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+.footer__top svg { width: 12px; height: 12px; }
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes bobDown {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(3px); }
+}
+@media (max-width: 900px) {
+    .projects__grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 580px) {
+    .container { padding: 0 1.25rem; }
+    .hero { padding: 6vh 0 3.5rem; }
+    .projects__grid { grid-template-columns: 1fr; gap: 1.25rem; }
+    .ekg { display: none; }
+}
+/* ── EKG Animation ── */
+.ekg {
+    position: absolute;
+    top: 6vh;
+    right: 0;
+    width: 280px;
+    height: 80px;
+    opacity: 0.18;
+    overflow: hidden;
+    pointer-events: none;
+}
+.ekg svg {
+    width: 100%;
+    height: 100%;
+}
+.ekg__line {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 600;
+    stroke-dashoffset: 600;
+    animation: ekgDraw 2.8s ease-in-out infinite;
+}
+.ekg__dot {
+    fill: var(--accent);
+    opacity: 0;
+    animation: ekgDot 2.8s ease-in-out infinite;
+}
+@keyframes ekgDraw {
+    0% { stroke-dashoffset: 600; }
+    40% { stroke-dashoffset: 0; }
+    65% { stroke-dashoffset: 0; opacity: 1; }
+    90% { stroke-dashoffset: 0; opacity: 0; }
+    100% { stroke-dashoffset: 600; opacity: 0; }
+}
+@keyframes ekgDot {
+    0%, 35% { opacity: 0; }
+    40% { opacity: 1; }
+    65% { opacity: 1; }
+    90% { opacity: 0; }
+    100% { opacity: 0; }
+}
+.hero { position: relative; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="hero" id="top">
+    <!-- Animated EKG graphic -->
+    <div class="ekg">
+        <svg viewBox="0 0 280 80" preserveAspectRatio="none">
+            <path class="ekg__line" d="M0,40 L60,40 L70,40 L78,40 L85,20 L92,60 L99,10 L106,70 L113,35 L120,42 L130,40 L200,40 L280,40" />
+            <circle class="ekg__dot" cx="280" cy="40" r="3" />
+        </svg>
+    </div>
+    <div class="hero__label">Portfolio</div>
+    <h1>Justin Yang //<br><em>Software Engineer</em></h1>
+    <p class="hero__bio">Systems programmer with a focus on computer security, network tooling, and financial APIs. Volunteer EMT.</p>
+    <div class="hero__links">
+        <a href="https://github.com/jyang772" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            @jyang772
+        </a>
+        <a href="mailto:quaxton@acm.org">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+            quaxton@acm.org
+        </a>
+		<a href="https://linkedin.com/in/jyango" target="_blank" rel="noopener">
+			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+			LinkedIn
+        </a>
+    </div>
+    <a href="#projects" class="skip-link">
+        Skip to projects
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path></svg>
+    </a>
+</header>
+
+<section class="projects" id="projects">
+    <div class="projects__heading">Selected Projects</div>
+    <div class="projects__grid">
+
+        <!-- ============ XOR_Crypter ============ -->
+        <article class="card">
+            <div class="card__media">
+                <div class="card__media-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                    <span>Security Research</span>
+                </div>
+            </div>
+            <div class="card__body">
+                <div class="card__top-row">
+                    <h2 class="card__title"><a href="https://github.com/jyang772/XOR_Crypter" target="_blank" rel="noopener">XOR_Crypter</a></h2>
+                    <span class="card__badge">open source</span>
+                </div>
+                <div class="card__subtitle">Binary obfuscation tool</div>
+                <p class="card__description">An XOR-based encryption tool for studying binary obfuscation techniques. Demonstrates PE file manipulation, encryption routines, and stub-based decryption at runtime. Built to explore how encryption layers interact with executable formats.</p>
+                <div class="card__tags">
+                    <span class="card__tag">C++</span>
+                    <span class="card__tag">Windows API</span>
+                    <span class="card__tag">PE Format</span>
+                    <span class="card__tag">Cryptography</span>
+                </div>
+                <div class="card__actions">
+                    <a href="https://github.com/jyang772/XOR_Crypter" target="_blank" rel="noopener" class="card__action card__action--primary">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        View Source
+                    </a>
+                </div>
+            </div>
+        </article>
+
+        <!-- ============ HideProcessHookMDL ============ -->
+        <article class="card">
+            <div class="card__media">
+                <div class="card__media-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+                    <span>Surveillance</span>
+                </div>
+            </div>
+            <div class="card__body">
+                <div class="card__top-row">
+                    <h2 class="card__title"><a href="https://github.com/jyang772/HideProcessHookMDL" target="_blank" rel="noopener">VDash</a></h2>
+                    <span class="card__badge card__badge--closed">closed source</span>
+                </div>
+                <div class="card__subtitle">IS&R Platform</div>
+                <p class="card__description">A surveillance and intelligence platform for tracking vehicle locations and driving patterns.</p>
+                <div class="card__tags">
+                    <span class="card__tag">Rust</span>
+                    <span class="card__tag">React</span>
+                    <span class="card__tag">Typescript</span>
+                </div>
+                <div class="card__actions">
+                    <a href="#" class="card__action card__action--secondary">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" x2="21" y1="14" y2="3"></line></svg>
+                        Details on request
+                    </a>
+                </div>
+            </div>
+        </article>
+
+        <!-- ============ alpaca-cpp ============ -->
+        <article class="card">
+            <div class="card__media">
+                <div class="card__media-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                    <span>Financial API</span>
+                </div>
+            </div>
+            <div class="card__body">
+                <div class="card__top-row">
+                    <h2 class="card__title"><a href="https://github.com/jyang772/alpaca-cpp" target="_blank" rel="noopener">alpaca-cpp</a></h2>
+                    <span class="card__badge">open source</span>
+                </div>
+                <div class="card__subtitle">Trading API client library</div>
+                <p class="card__description">A C++ client library for the Alpaca trade API, supporting both REST and WebSocket streaming interfaces. Designed for rapid trading algorithm development with clean abstractions over market data, order management, and account operations.</p>
+                <div class="card__tags">
+                    <span class="card__tag">C++</span>
+                    <span class="card__tag">REST API</span>
+                    <span class="card__tag">WebSocket</span>
+                    <span class="card__tag">Finance</span>
+                </div>
+                <div class="card__actions">
+                    <a href="https://github.com/jyang772/alpaca-cpp" target="_blank" rel="noopener" class="card__action card__action--primary">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        View Source
+                    </a>
+                </div>
+            </div>
+        </article>
+
+        <!-- ============ WebCrypt ============ -->
+        <article class="card">
+            <div class="card__media">
+                <div class="card__media-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                    <span>Web Security</span>
+                </div>
+            </div>
+            <div class="card__body">
+                <div class="card__top-row">
+                    <h2 class="card__title"><a href="https://github.com/jyang772/WebCrypt" target="_blank" rel="noopener">WebCrypt</a></h2>
+                    <span class="card__badge">open source</span>
+                </div>
+                <div class="card__subtitle">Web-based encryption tool</div>
+                <p class="card__description">A web-based crypter combining a C++ backend with a browser-accessible frontend. Explores the intersection of web delivery mechanisms and binary encryption, built with XAMPP for local hosting and testing.</p>
+                <div class="card__tags">
+                    <span class="card__tag">C++</span>
+                    <span class="card__tag">Web</span>
+                    <span class="card__tag">XAMPP</span>
+                    <span class="card__tag">Encryption</span>
+                </div>
+                <div class="card__actions">
+                    <a href="https://github.com/jyang772/WebCrypt" target="_blank" rel="noopener" class="card__action card__action--primary">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        View Source
+                    </a>
+                </div>
+            </div>
+        </article>
+
+        <!-- ============ MacSpoof ============ -->
+        <article class="card">
+            <div class="card__media">
+                <div class="card__media-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                    <span>Network Tooling</span>
+                </div>
+            </div>
+            <div class="card__body">
+                <div class="card__top-row">
+                    <h2 class="card__title"><a href="https://github.com/jyang772/MacSpoof" target="_blank" rel="noopener">MacSpoof</a></h2>
+                    <span class="card__badge">open source</span>
+                </div>
+                <div class="card__subtitle">MAC address utility</div>
+                <p class="card__description">A shell-based network utility that automates MAC address spoofing using nmap for network scanning, dhclient for DHCP lease management, and wpa_supplicant for wireless authentication. Useful for network testing and privacy research.</p>
+                <div class="card__tags">
+                    <span class="card__tag">Shell</span>
+                    <span class="card__tag">nmap</span>
+                    <span class="card__tag">dhclient</span>
+                    <span class="card__tag">wpa_supplicant</span>
+                </div>
+                <div class="card__actions">
+                    <a href="https://github.com/jyang772/MacSpoof" target="_blank" rel="noopener" class="card__action card__action--primary">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        View Source
+                    </a>
+                </div>
+            </div>
+        </article>
+
+        <!-- ============ PenguinCrypt ============ -->
+        <article class="card">
+            <div class="card__media">
+                <div class="card__media-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    <span>Cryptography</span>
+                </div>
+            </div>
+            <div class="card__body">
+                <div class="card__top-row">
+                    <h2 class="card__title"><a href="https://github.com/jyang772/PenguinCrypt" target="_blank" rel="noopener">PenguinCrypt</a></h2>
+                    <span class="card__badge">open source</span>
+                </div>
+                <div class="card__subtitle">Encryption tool</div>
+                <p class="card__description">A C++ encryption tool exploring custom cryptographic routines and binary packing techniques. Part of ongoing research into executable protection and code obfuscation methods.</p>
+                <div class="card__tags">
+                    <span class="card__tag">C++</span>
+                    <span class="card__tag">Encryption</span>
+                    <span class="card__tag">Binary Analysis</span>
+                </div>
+                <div class="card__actions">
+                    <a href="https://github.com/jyang772/PenguinCrypt" target="_blank" rel="noopener" class="card__action card__action--primary">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        View Source
+                    </a>
+                </div>
+            </div>
+        </article>
+
+    </div>
+</section>
+
+<footer>
+    <p><a href="https://github.com/jyang772" target="_blank" rel="noopener">GitHub: @jyang772</a> &middot;</p>
+    <a href="#top" class="footer__top">
+        Back to top
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" st
